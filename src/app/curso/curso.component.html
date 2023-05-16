@@ -1,0 +1,36 @@
+<div class="cadastrar-curso">
+    <form>
+        <img src="../../assets/img/bolsa-de-estudo.png" class="img-icon">
+        <input type="text" placeholder="Título" class="form-control" [(ngModel)]="curso.title" [ngModelOptions]="{standalone: true}">
+        <input type="text" placeholder="Descrição" class="form-control-desc" [(ngModel)]="curso.description" [ngModelOptions]="{standalone: true}">
+        <input type="number" placeholder="Preço" class="form-control" [(ngModel)]="curso.price" [ngModelOptions]="{standalone: true}">
+        <div class="button">
+            <input type="button" value="Cadastrar" class="btn-cadastrar" (click)="cadastro()" *ngIf="btnVisible">
+            <input type="button" value="Alterar" class="btn-alterar" (click)="alterar()" *ngIf="!btnVisible">
+            <input type="button" value="Voltar" class="btn-voltar" (click)="voltar()" *ngIf="!btnVisible">
+        </div>
+    </form>
+    <h1>{{curso | json}}</h1>
+    <table *ngIf="tabela">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título<button class="btn-sort" (click)="sortSelecao('Title')"><i class="fa-solid fa-chevron-down"></i></button></th>
+                <th>Descrição</th>
+                <th>Preço (R$)<button class="btn-sort" (click)="sortSelecao('Price')"><i class="fa-solid fa-chevron-down"></i></button></th>
+                <th>Selecionar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of cursos; index as i">
+                <td>{{c.id}}</td>
+                <td>{{c.title}}</td>
+                <td>{{c.description}}</td>
+                <td>{{c.price|currency:"BRL"}}</td>
+                <td><button class="btn-selecionar" (click)="selecionarCurso(i)"><i class="fa-solid fa-magnifying-glass"></i></button></td>
+                <td><button class="btn-apagar" (click)="remover(i)"><i class="fa-solid fa-xmark"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
